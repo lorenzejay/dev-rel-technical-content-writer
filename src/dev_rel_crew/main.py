@@ -9,7 +9,7 @@ def run():
         "tech_stack": "crewai.com, python, groq",
         "output_blog_path": "output/crew_ai_doc.md",
         "output_tweet_path": "output/crew_ai_tweet.md",
-        "deployment_blog_file_name": "/Users/lorenzejay/workspace/experimental/ai_tools/dev_rel_crew/output/crew_ai_doc.md",
+        "deployment_blog_file_name": "<your own path reference full path>",
         "github_repo_name": "https://github.com/crewAIInc/crewAI",
     }
 
