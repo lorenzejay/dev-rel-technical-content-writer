@@ -3,7 +3,7 @@ name = "dev_rel_crew"
 version = "0.1.0"
 description = "dev_rel_crew using crewAI"
 authors = [
-    { name = "Your Name", email = "you@example.com" },
+    { name = "Lorenze Jay Hernandez", email = "lorenzejaytech@gmail.com" },
 ]
 requires-python = ">=3.10,<=3.13"
 dependencies = [
@@ -13,12 +13,11 @@ dependencies = [
 ]
 
 [project.scripts]
+dev_rel_crew = "dev_rel_crew.main:run"
 run_crew = "dev_rel_crew.main:run"
 train = "dev_rel_crew.main:train"
 replay_from_task = "dev_rel_crew.main:replay_from_task"
 
 [build-system]
-requires = [
-    "hatchling",
-]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
