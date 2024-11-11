@@ -1,17 +1,15 @@
 import os
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import SerperDevTool, ScrapeWebsiteTool
+from crewai_tools import ScrapeWebsiteTool, GithubSearchTool, EXASearchTool
 from dotenv import load_dotenv
-from langchain_groq import ChatGroq
-from langchain_openai import ChatOpenAI
+# from langchain_community.tools import DuckDuckGoSearchRun
 
 load_dotenv()
 
-openai_llm = ChatOpenAI(
-    model_name="gpt-4o",
-    temperature=0,
-    openai_api_key=os.getenv("OPENAI_API_KEY"),
+github_dev_tool = GithubSearchTool(
+    gh_token=os.getenv("GITHUB_API_KEY"),
+    content_types=["code", "repo"],
 )
 
 
@@ -26,9 +24,9 @@ class DevRelCrewCrew:
     def researcher(self) -> Agent:
         return Agent(
             config=self.agents_config["researcher"],
-            tools=[SerperDevTool()],
+            tools=[EXASearchTool(), github_dev_tool],
             verbose=True,
-            llm=openai_llm,
+            llm="openai/gpt-4o-mini",
         )
 
     @agent
@@ -36,7 +34,7 @@ class DevRelCrewCrew:
         return Agent(
             config=self.agents_config["blog_chapter_writer"],
             verbose=True,
-            llm=openai_llm,
+            llm="openai/gpt-4o-mini",
         )
 
     @agent
@@ -44,13 +42,17 @@ class DevRelCrewCrew:
         return Agent(
             config=self.agents_config["blog_writer"],
             verbose=True,
-            llm=openai_llm,
             tools=[ScrapeWebsiteTool()],
+            llm="openai/gpt-4o-mini",
         )
 
     @agent
     def tweet_writer(self) -> Agent:
-        return Agent(config=self.agents_config["tweet_writer"], verbose=True)
+        return Agent(
+            config=self.agents_config["tweet_writer"],
+            verbose=True,
+            llm="openai/gpt-4o-mini",
+        )
 
     @task
     def research_task(self) -> Task:
@@ -81,9 +83,8 @@ class DevRelCrewCrew:
     def crew(self) -> Crew:
         """Creates the DevRelCrew crew"""
         return Crew(
-            agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,  # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )

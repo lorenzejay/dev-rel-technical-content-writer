@@ -4,7 +4,8 @@ research_task:
     Make sure you find any interesting and relevant information given
     the current year is 2024.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {github_repo_name} and the {tech_stack}.
+    A list with 10 bullet points of the most 
+    relevant information about {github_repo_name} and the {tech_stack}.
 
 chapter_writer_task:
   description: >
@@ -21,7 +22,8 @@ blog_post_task:
   description: >
     With the context you got, write a technical blog post on {topic} using {tech_stack}.
     Be sure to stay on topic with the the {tech_stack}
-    Use the github repo {github_repo_name} and {tech_stack} to get the code examples and only use this to get the code examples and its examples.
+    Use the github repo {github_repo_name} and {tech_stack} to get the code examples.
+    Only use this to get the code examples and its examples.
     Ensure the blog post is well structured, contains all necessary sections, and is written in a clear and engaging manner.
     The blog should have primarily based on code examples using the {tech_stack}
     Ensure you use {tech_stack} in the blog post.
@@ -29,15 +31,7 @@ blog_post_task:
   expected_output: >
     A fully fledge blog post with the main topics, each with a full section of information.
     Formatted as markdown without '```'
-  output_file: "{output_blog_path}"
-
-# blog_post_upload_task:
-#   description: >
-#     Upload the blog post to Medium using the MediumDeployTool tool.
-#     The blog path is {deployment_blog_file_name} and generate the title of the blog post first.
-
-#   expected_output: >
-#     A success message from the MediumDeployTool tool.
+  output_file: "output/blog.md"
 
 tweet_writer_task:
   description: >
@@ -47,4 +41,4 @@ tweet_writer_task:
   expected_output: >
     A tweet that is engaging and interesting to our audience.
     Formatted as markdown without '```'
-  output_file: "{output_tweet_path}"
+  output_file: "output/tweet.md"

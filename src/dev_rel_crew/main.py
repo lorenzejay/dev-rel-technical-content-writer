@@ -5,43 +5,13 @@ from dev_rel_crew.crew import DevRelCrewCrew
 
 def run():
     inputs = {
-        "topic": "Using crewai to automate content creation for a tech saas focused on researching competitors and content idea listing.",
-        "tech_stack": "crewai.com, python, groq",
-        "output_blog_path": "output/crew_ai_doc.md",
-        "output_tweet_path": "output/crew_ai_tweet.md",
-        "deployment_blog_file_name": "<your own path reference full path>",
+        "topic": "Using CrewAI agents with Composio tools to create a SQL agent that can query a database",
+        "tech_stack": "crewai.com, python, composio.dev",
         "github_repo_name": "https://github.com/crewAIInc/crewAI",
     }
 
     result = DevRelCrewCrew().crew().kickoff(inputs=inputs)
-
-    print(result)
-
-
-# to run multiple inputs
-# async def run():
-#     inputs = [
-#         {
-#             "topic": "Using crewai agents to automate researching competitors and optimizing a tech company's content creation",
-#             "tech_stack": "crewai, crewai-tools",
-#             "output_blog_path": "output/blog_1.md",
-#             "output_tweet_path": "output/tweet_1.md",
-#             "deployment_blog_file_name": "output/blog_1.md",
-#             "github_repo_name": "https://github.com/crewAIInc/crewAI",
-#         },
-#         {
-#             "topic": "Using crewai to automate content creation for a tech company.",
-#             "tech_stack": "crewai.com",
-#             "output_blog_path": "output/blog_2.md",
-#             "output_tweet_path": "output/tweet_2.md",
-#             "deployment_blog_file_name": "output/blog_2.md",
-#             "github_repo_name": "https://github.com/crewAIInc/crewAI",
-#         },
-#     ]
-
-#     result = await DevRelCrewCrew().crew().kickoff_for_each_async(inputs=inputs)
-
-#     print(result)
+    print("result", result)
 
 
 def train():
@@ -49,11 +19,16 @@ def train():
     Train the crew for a given number of iterations.
     """
     inputs = {
-        "topic": "Simple RAG app with Haystack",
-        "tech_stack": "Python, Haystack, Langchain",
+        "topic": "Using CrewAI agents with Composio tools to create a SQL agent that can query a database",
+        "tech_stack": "crewai.com, python, composio.dev",
+        "github_repo_name": "https://github.com/crewAIInc/crewAI",
     }
     try:
-        DevRelCrewCrew().crew().train(n_iterations=int(sys.argv[1]), inputs=inputs)
+        DevRelCrewCrew().crew().train(
+            n_iterations=int(sys.argv[1]),
+            inputs=inputs,
+            filename="trained_agents_data.pkl",
+        )
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -68,6 +43,20 @@ def replay_from_task():
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
+
+
+def test():
+    """
+    Test the crew for a given number of iterations.
+    """
+    inputs = {
+        "topic": "Using CrewAI agents with Composio tools to create a SQL agent that can query a database",
+        "tech_stack": "crewai.com, python, composio.dev",
+        "github_repo_name": "https://github.com/crewAIInc/crewAI",
+    }
+    DevRelCrewCrew().crew().test(
+        n_iterations=2, inputs=inputs, openai_model_name="gpt-4o"
+    )
 
 
 # def main():

@@ -2,3 +2,6 @@
 __pycache__/
 output
 trained_agents_data.pkl
+db/*
+pyproject-old.toml
+.DS_Store
